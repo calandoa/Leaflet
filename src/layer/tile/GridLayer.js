@@ -231,6 +231,7 @@ export const GridLayer = Layer.extend({
 			const tileZoom = this._clampZoom(this._map.getZoom());
 			if (tileZoom !== this._tileZoom) {
 				this._tileZoom = tileZoom;
+				this._tile_zoom_tune();
 				this._updateLevels();
 			}
 			this._update();
@@ -571,6 +572,7 @@ export const GridLayer = Layer.extend({
 		if (!noUpdate || tileZoomChanged) {
 
 			this._tileZoom = tileZoom;
+			this._tile_zoom_tune();
 
 			if (this._abortLoading) {
 				this._abortLoading();
@@ -646,6 +648,21 @@ export const GridLayer = Layer.extend({
 		    halfSize = map.getSize().divideBy(scale * 2);
 
 		return new Bounds(pixelCenter.subtract(halfSize), pixelCenter.add(halfSize));
+	},
+
+	_tile_zoom_tune() {
+
+		if (this.options.zoomTune.length) {
+			var zoom = this._tileZoom;
+			var tzoom = Math.min(zoom - this.options.minZoom - this.options.zoomOffset, this.options.zoomTune.length - 1);
+			zoom = this.options.zoomTune[tzoom + this.options.zoomOffset ] - this.options.zoomOffset;
+
+			console.log("ztune", zoom, 'ini', tzoom, this._tileZoom);
+
+			// prevent custom zoom to use too many tiles
+			//this.z_url  = Math.min(nzoom, map.getZoom() + 4);
+			this._tileZoom = zoom;
+		}
 	},
 
 	// Private method to load tiles in the grid's active zoom level according to map bounds

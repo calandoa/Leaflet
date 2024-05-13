@@ -59,6 +59,8 @@ export const TileLayer = GridLayer.extend({
 		// The zoom number used in tile URLs will be offset with this value.
 		zoomOffset: 0,
 
+		zoomTune: [],
+
 		// @option tms: Boolean = false
 		// If `true`, inverses Y axis numbering for tiles (turn this on for [TMS](https://en.wikipedia.org/wiki/Tile_Map_Service) services).
 		tms: false,
@@ -165,8 +167,20 @@ export const TileLayer = GridLayer.extend({
 		tile.alt = '';
 
 		tile.src = this.getTileUrl(coords);
+		//console.log("     ",  tile.src);
 
 		return tile;
+	},
+
+	quadKey  (x, y, z) {
+		var q = '';
+		for (var m = 1 << (z - 1); m; m >>= 1) {
+			var b = 0;
+			if (x & m) b += 1;
+			if (y & m) b += 2;
+			q += b.toString();
+		}
+		return q;
 	},
 
 	// @section Extension methods
@@ -176,9 +190,11 @@ export const TileLayer = GridLayer.extend({
 	// Called only internally, returns the URL for a tile given its coordinates.
 	// Classes extending `TileLayer` can override this function to provide custom tile URL naming schemes.
 	getTileUrl(coords) {
+	//console.log('             Z', this.z_url, this.xy_rotr_url, this.xy_rotl_url);
 		const data = {
 			r: Browser.retina ? '@2x' : '',
 			s: this._getSubdomain(coords),
+			q: this.quadKey(coords.x, coords.y, this._getZoomForUrl()),
 			x: coords.x,
 			y: coords.y,
 			z: this._getZoomForUrl()
