@@ -19,7 +19,7 @@ export const Zoom = Control.extend({
 		// @option position: String = 'topleft'
 		// The position of the control (one of the map corners). Possible values are `'topleft'`,
 		// `'topright'`, `'bottomleft'` or `'bottomright'`
-		position: 'topleft',
+		position: 'topright',
 
 		// @option zoomInText: String = '<span aria-hidden="true">+</span>'
 		// The text set on the 'zoom in' button.

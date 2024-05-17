@@ -657,7 +657,7 @@ export const GridLayer = Layer.extend({
 			var tzoom = Math.min(zoom - this.options.minZoom - this.options.zoomOffset, this.options.zoomTune.length - 1);
 			zoom = this.options.zoomTune[tzoom + this.options.zoomOffset ] - this.options.zoomOffset;
 
-			console.log("ztune", zoom, 'ini', tzoom, this._tileZoom);
+			//console.log("ztune", zoom, 'ini', tzoom, this._tileZoom);
 
 			// prevent custom zoom to use too many tiles
 			//this.z_url  = Math.min(nzoom, map.getZoom() + 4);
