@@ -174,7 +174,7 @@ export const TileLayer = GridLayer.extend({
 
 	quadKey  (x, y, z) {
 		var q = '';
-		for (var m = 1 << (z - 1); m; m >>= 1) {
+		for (var m = 1 << (z - 1); m && z; m >>= 1) {
 			var b = 0;
 			if (x & m) b += 1;
 			if (y & m) b += 2;

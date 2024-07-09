@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IGN maps SHOM PC</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="leaflet.css" />
+</head>
+<body style="height: 100%" >
+
+    <style type="text/css">
+	.leaflet-control-layers-expanded {
+	  columns: 5;
+	}
+	</style>
+	<div id="map" style="width: 100%; height: 100% ;  position:absolute; top: 0%; left: 0%;"></div>
+	<!-- <div id="map" style="width: 30%; height: 40% ;  position:absolute; top: 30%; left: 35%;"></div> -->
+	<!-- <script src="leaflet.js"></script> -->
+	  <script src="c:/Users/az01912/mysrc/leaflet/dist/leaflet-src.js"></script>  
+	
+	<script>
+		const OPT = {minZoom: 0, maxZoom: 5, tileSize:512, noWrap: true};
+		var
+			shom =	L.tileLayer('fr/shom{y}{x}.jpg', {minZoom: 0, maxZoom: 5, zoomTune: [ 0, 0, 0, 0, 0, 0], noWrap: true}),
+			S4232 = L.tileLayer('fr/SHOM4232/{z}/{y}/{x}.jpg', OPT),
+			S5978 = L.tileLayer('fr/SHOM5978/{z}/{y}/{x}.jpg', OPT),
+			S6033 = L.tileLayer('fr/SHOM6033/{z}/{y}/{x}.jpg', OPT),
+			S6165 = L.tileLayer('fr/SHOM6165/{z}/{y}/{x}.jpg', OPT),
+			S6207 = L.tileLayer('fr/SHOM6207/{z}/{y}/{x}.jpg', OPT),
+			S6279 = L.tileLayer('fr/SHOM6279/{z}/{y}/{x}.jpg', OPT),
+			S6280 = L.tileLayer('fr/SHOM6280/{z}/{y}/{x}.jpg', OPT),
+			S6281 = L.tileLayer('fr/SHOM6281/{z}/{y}/{x}.jpg', OPT),
+			S6282 = L.tileLayer('fr/SHOM6282/{z}/{y}/{x}.jpg', OPT),
+			S6283 = L.tileLayer('fr/SHOM6283/{z}/{y}/{x}.jpg', OPT),
+			S6284 = L.tileLayer('fr/SHOM6284/{z}/{y}/{x}.jpg', OPT),
+			S6320 = L.tileLayer('fr/SHOM6320/{z}/{y}/{x}.jpg', OPT),
+			S6420 = L.tileLayer('fr/SHOM6420/{z}/{y}/{x}.jpg', OPT),
+			S6424 = L.tileLayer('fr/SHOM6424/{z}/{y}/{x}.jpg', OPT),
+			S6434 = L.tileLayer('fr/SHOM6434/{z}/{y}/{x}.jpg', OPT),
+			S6461 = L.tileLayer('fr/SHOM6461/{z}/{y}/{x}.jpg', OPT),
+			S6462 = L.tileLayer('fr/SHOM6462/{z}/{y}/{x}.jpg', OPT),
+			S6525 = L.tileLayer('fr/SHOM6525/{z}/{y}/{x}.jpg', OPT),
+			S6540 = L.tileLayer('fr/SHOM6540/{z}/{y}/{x}.jpg', OPT),
+			S6553 = L.tileLayer('fr/SHOM6553/{z}/{y}/{x}.jpg', OPT),
+			S6554 = L.tileLayer('fr/SHOM6554/{z}/{y}/{x}.jpg', OPT),
+			S6589 = L.tileLayer('fr/SHOM6589/{z}/{y}/{x}.jpg', OPT),
+			S6604 = L.tileLayer('fr/SHOM6604/{z}/{y}/{x}.jpg', OPT),
+			S6605 = L.tileLayer('fr/SHOM6605/{z}/{y}/{x}.jpg', OPT),
+			S6607 = L.tileLayer('fr/SHOM6607/{z}/{y}/{x}.jpg', OPT),
+			S6608 = L.tileLayer('fr/SHOM6608/{z}/{y}/{x}.jpg', OPT),
+			S6657 = L.tileLayer('fr/SHOM6657/{z}/{y}/{x}.jpg', OPT),
+			S6658 = L.tileLayer('fr/SHOM6658/{z}/{y}/{x}.jpg', OPT),
+			S6670 = L.tileLayer('fr/SHOM6670/{z}/{y}/{x}.jpg', OPT),
+			S6671 = L.tileLayer('fr/SHOM6671/{z}/{y}/{x}.jpg', OPT),
+			S6687 = L.tileLayer('fr/SHOM6687/{z}/{y}/{x}.jpg', OPT),
+			S6688 = L.tileLayer('fr/SHOM6688/{z}/{y}/{x}.jpg', OPT),
+			S6689 = L.tileLayer('fr/SHOM6689/{z}/{y}/{x}.jpg', OPT),
+			S6690 = L.tileLayer('fr/SHOM6690/{z}/{y}/{x}.jpg', OPT),
+			S6691 = L.tileLayer('fr/SHOM6691/{z}/{y}/{x}.jpg', OPT),
+			S6692 = L.tileLayer('fr/SHOM6692/{z}/{y}/{x}.jpg', OPT),
+			S6717 = L.tileLayer('fr/SHOM6717/{z}/{y}/{x}.jpg', OPT),
+			S6740 = L.tileLayer('fr/SHOM6740/{z}/{y}/{x}.jpg', OPT),
+			S6768 = L.tileLayer('fr/SHOM6768/{z}/{y}/{x}.jpg', OPT),
+			S6770 = L.tileLayer('fr/SHOM6770/{z}/{y}/{x}.jpg', OPT),
+			S6817 = L.tileLayer('fr/SHOM6817/{z}/{y}/{x}.jpg', OPT),
+			S6820 = L.tileLayer('fr/SHOM6820/{z}/{y}/{x}.jpg', OPT),
+			S6827 = L.tileLayer('fr/SHOM6827/{z}/{y}/{x}.jpg', OPT),
+			S6828 = L.tileLayer('fr/SHOM6828/{z}/{y}/{x}.jpg', OPT),
+			S6835 = L.tileLayer('fr/SHOM6835/{z}/{y}/{x}.jpg', OPT),
+			S6876 = L.tileLayer('fr/SHOM6876/{z}/{y}/{x}.jpg', OPT),
+			S6880 = L.tileLayer('fr/SHOM6880/{z}/{y}/{x}.jpg', OPT),
+			S6933 = L.tileLayer('fr/SHOM6933/{z}/{y}/{x}.jpg', OPT),
+			S6949 = L.tileLayer('fr/SHOM6949/{z}/{y}/{x}.jpg', OPT),
+			S6955 = L.tileLayer('fr/SHOM6955/{z}/{y}/{x}.jpg', OPT),
+			S6956 = L.tileLayer('fr/SHOM6956/{z}/{y}/{x}.jpg', OPT),
+			S6957 = L.tileLayer('fr/SHOM6957/{z}/{y}/{x}.jpg', OPT),
+			S6964 = L.tileLayer('fr/SHOM6964/{z}/{y}/{x}.jpg', OPT),
+			S6977 = L.tileLayer('fr/SHOM6977/{z}/{y}/{x}.jpg', OPT),
+			S6985 = L.tileLayer('fr/SHOM6985/{z}/{y}/{x}.jpg', OPT),
+			S6986 = L.tileLayer('fr/SHOM6986/{z}/{y}/{x}.jpg', OPT),
+			S7011 = L.tileLayer('fr/SHOM7011/{z}/{y}/{x}.jpg', OPT),
+			S7021 = L.tileLayer('fr/SHOM7021/{z}/{y}/{x}.jpg', OPT),
+			S7023 = L.tileLayer('fr/SHOM7023/{z}/{y}/{x}.jpg', OPT),
+			S7049 = L.tileLayer('fr/SHOM7049/{z}/{y}/{x}.jpg', OPT),
+			S7051 = L.tileLayer('fr/SHOM7051/{z}/{y}/{x}.jpg', OPT),
+			S7052 = L.tileLayer('fr/SHOM7052/{z}/{y}/{x}.jpg', OPT),
+			S7073 = L.tileLayer('fr/SHOM7073/{z}/{y}/{x}.jpg', OPT),
+			S7097 = L.tileLayer('fr/SHOM7097/{z}/{y}/{x}.jpg', OPT),
+			S7098 = L.tileLayer('fr/SHOM7098/{z}/{y}/{x}.jpg', OPT),
+			S7166 = L.tileLayer('fr/SHOM7166/{z}/{y}/{x}.jpg', OPT),
+			S7167 = L.tileLayer('fr/SHOM7167/{z}/{y}/{x}.jpg', OPT),
+			S7168 = L.tileLayer('fr/SHOM7168/{z}/{y}/{x}.jpg', OPT),
+			S7213 = L.tileLayer('fr/SHOM7213/{z}/{y}/{x}.jpg', OPT),
+			S7218 = L.tileLayer('fr/SHOM7218/{z}/{y}/{x}.jpg', OPT),
+			S7234 = L.tileLayer('fr/SHOM7234/{z}/{y}/{x}.jpg', OPT),
+			S7246 = L.tileLayer('fr/SHOM7246/{z}/{y}/{x}.jpg', OPT),
+			S7248 = L.tileLayer('fr/SHOM7248/{z}/{y}/{x}.jpg', OPT),
+			S7259 = L.tileLayer('fr/SHOM7259/{z}/{y}/{x}.jpg', OPT),
+			S7260 = L.tileLayer('fr/SHOM7260/{z}/{y}/{x}.jpg', OPT),
+			S7261 = L.tileLayer('fr/SHOM7261/{z}/{y}/{x}.jpg', OPT),
+			S7262 = L.tileLayer('fr/SHOM7262/{z}/{y}/{x}.jpg', OPT),
+			S7268 = L.tileLayer('fr/SHOM7268/{z}/{y}/{x}.jpg', OPT),
+			S7273 = L.tileLayer('fr/SHOM7273/{z}/{y}/{x}.jpg', OPT),
+			S7281 = L.tileLayer('fr/SHOM7281/{z}/{y}/{x}.jpg', OPT),
+			S7283 = L.tileLayer('fr/SHOM7283/{z}/{y}/{x}.jpg', OPT),
+			S7293 = L.tileLayer('fr/SHOM7293/{z}/{y}/{x}.jpg', OPT),
+			S7305 = L.tileLayer('fr/SHOM7305/{z}/{y}/{x}.jpg', OPT),
+			S7313 = L.tileLayer('fr/SHOM7313/{z}/{y}/{x}.jpg', OPT),
+			S7314 = L.tileLayer('fr/SHOM7314/{z}/{y}/{x}.jpg', OPT),
+			S7318 = L.tileLayer('fr/SHOM7318/{z}/{y}/{x}.jpg', OPT),
+			S7319 = L.tileLayer('fr/SHOM7319/{z}/{y}/{x}.jpg', OPT),
+			S7320 = L.tileLayer('fr/SHOM7320/{z}/{y}/{x}.jpg', OPT),
+			S7321 = L.tileLayer('fr/SHOM7321/{z}/{y}/{x}.jpg', OPT),
+			S7322 = L.tileLayer('fr/SHOM7322/{z}/{y}/{x}.jpg', OPT),
+			S7329 = L.tileLayer('fr/SHOM7329/{z}/{y}/{x}.jpg', OPT),
+			S7346 = L.tileLayer('fr/SHOM7346/{z}/{y}/{x}.jpg', OPT),
+			S7347 = L.tileLayer('fr/SHOM7347/{z}/{y}/{x}.jpg', OPT),
+			S7351 = L.tileLayer('fr/SHOM7351/{z}/{y}/{x}.jpg', OPT),
+			S7352 = L.tileLayer('fr/SHOM7352/{z}/{y}/{x}.jpg', OPT),
+			S7353 = L.tileLayer('fr/SHOM7353/{z}/{y}/{x}.jpg', OPT),
+			S7354 = L.tileLayer('fr/SHOM7354/{z}/{y}/{x}.jpg', OPT),
+			S7355 = L.tileLayer('fr/SHOM7355/{z}/{y}/{x}.jpg', OPT),
+			S7356 = L.tileLayer('fr/SHOM7356/{z}/{y}/{x}.jpg', OPT),
+			S7357 = L.tileLayer('fr/SHOM7357/{z}/{y}/{x}.jpg', OPT),
+			S7368 = L.tileLayer('fr/SHOM7368/{z}/{y}/{x}.jpg', OPT),
+			S7369 = L.tileLayer('fr/SHOM7369/{z}/{y}/{x}.jpg', OPT),
+			S7370 = L.tileLayer('fr/SHOM7370/{z}/{y}/{x}.jpg', OPT),
+			S7371 = L.tileLayer('fr/SHOM7371/{z}/{y}/{x}.jpg', OPT),
+			S7372 = L.tileLayer('fr/SHOM7372/{z}/{y}/{x}.jpg', OPT),
+			S7373 = L.tileLayer('fr/SHOM7373/{z}/{y}/{x}.jpg', OPT),
+			S7375 = L.tileLayer('fr/SHOM7375/{z}/{y}/{x}.jpg', OPT),
+			S7453 = L.tileLayer('fr/SHOM7453/{z}/{y}/{x}.jpg', OPT),
+			S7454 = L.tileLayer('fr/SHOM7454/{z}/{y}/{x}.jpg', OPT),
+			S7456 = L.tileLayer('fr/SHOM7456/{z}/{y}/{x}.jpg', OPT),
+			S7457 = L.tileLayer('fr/SHOM7457/{z}/{y}/{x}.jpg', OPT),
+			S7458 = L.tileLayer('fr/SHOM7458/{z}/{y}/{x}.jpg', OPT),
+			S7459 = L.tileLayer('fr/SHOM7459/{z}/{y}/{x}.jpg', OPT),
+			S7460 = L.tileLayer('fr/SHOM7460/{z}/{y}/{x}.jpg', OPT),
+			S7461 = L.tileLayer('fr/SHOM7461/{z}/{y}/{x}.jpg', OPT),
+			S7466 = L.tileLayer('fr/SHOM7466/{z}/{y}/{x}.jpg', OPT),
+			S7643 = L.tileLayer('fr/SHOM7643/{z}/{y}/{x}.jpg', OPT),
+			S7644 = L.tileLayer('fr/SHOM7644/{z}/{y}/{x}.jpg', OPT),
+			S7645 = L.tileLayer('fr/SHOM7645/{z}/{y}/{x}.jpg', OPT),
+			S7751 = L.tileLayer('fr/SHOM7751/{z}/{y}/{x}.jpg', OPT),
+			S7755 = L.tileLayer('fr/SHOM7755/{z}/{y}/{x}.jpg', OPT),
+			S7756 = L.tileLayer('fr/SHOM7756/{z}/{y}/{x}.jpg', OPT),
+			S7758 = L.tileLayer('fr/SHOM7758/{z}/{y}/{x}.jpg', OPT),
+			S7760 = L.tileLayer('fr/SHOM7760/{z}/{y}/{x}.jpg', OPT),
+			S7761 = L.tileLayer('fr/SHOM7761/{z}/{y}/{x}.jpg', OPT),
+			S7762 = L.tileLayer('fr/SHOM7762/{z}/{y}/{x}.jpg', OPT),
+
+			x;
+
+		var baseMaps = {
+			"IDX": shom,
+			"4232" : S4232,
+			"5978" : S5978,
+			"6033" : S6033,
+			"6165" : S6165,
+			"6207" : S6207,
+			"6279" : S6279,
+			"6280" : S6280,
+			"6281" : S6281,
+			"6282" : S6282,
+			"6283" : S6283,
+			"6284" : S6284,
+			"6320" : S6320,
+			"6420" : S6420,
+			"6424" : S6424,
+			"6434" : S6434,
+			"6461" : S6461,
+			"6462" : S6462,
+			"6525" : S6525,
+			"6540" : S6540,
+			"6553" : S6553,
+			"6554" : S6554,
+			"6589" : S6589,
+			"6604" : S6604,
+			"6605" : S6605,
+			"6607" : S6607,
+			"6608" : S6608,
+			"6657" : S6657,
+			"6658" : S6658,
+			"6670" : S6670,
+			"6671" : S6671,
+			"6687" : S6687,
+			"6688" : S6688,
+			"6689" : S6689,
+			"6690" : S6690,
+			"6691" : S6691,
+			"6692" : S6692,
+			"6717" : S6717,
+			"6740" : S6740,
+			"6768" : S6768,
+			"6770" : S6770,
+			"6817" : S6817,
+			"6820" : S6820,
+			"6827" : S6827,
+			"6828" : S6828,
+			"6835" : S6835,
+			"6876" : S6876,
+			"6880" : S6880,
+			"6933" : S6933,
+			"6949" : S6949,
+			"6955" : S6955,
+			"6956" : S6956,
+			"6957" : S6957,
+			"6964" : S6964,
+			"6977" : S6977,
+			"6985" : S6985,
+			"6986" : S6986,
+			"7011" : S7011,
+			"7021" : S7021,
+			"7023" : S7023,
+			"7049" : S7049,
+			"7051" : S7051,
+			"7052" : S7052,
+			"7073" : S7073,
+			"7097" : S7097,
+			"7098" : S7098,
+			"7166" : S7166,
+			"7167" : S7167,
+			"7168" : S7168,
+			"7213" : S7213,
+			"7218" : S7218,
+			"7234" : S7234,
+			"7246" : S7246,
+			"7248" : S7248,
+			"7259" : S7259,
+			"7260" : S7260,
+			"7261" : S7261,
+			"7262" : S7262,
+			"7268" : S7268,
+			"7273" : S7273,
+			"7281" : S7281,
+			"7283" : S7283,
+			"7293" : S7293,
+			"7305" : S7305,
+			"7313" : S7313,
+			"7314" : S7314,
+			"7318" : S7318,
+			"7319" : S7319,
+			"7320" : S7320,
+			"7321" : S7321,
+			"7322" : S7322,
+			"7329" : S7329,
+			"7346" : S7346,
+			"7347" : S7347,
+			"7351" : S7351,
+			"7352" : S7352,
+			"7353" : S7353,
+			"7354" : S7354,
+			"7355" : S7355,
+			"7356" : S7356,
+			"7357" : S7357,
+			"7368" : S7368,
+			"7369" : S7369,
+			"7370" : S7370,
+			"7371" : S7371,
+			"7372" : S7372,
+			"7373" : S7373,
+			"7375" : S7375,
+			"7453" : S7453,
+			"7454" : S7454,
+			"7456" : S7456,
+			"7457" : S7457,
+			"7458" : S7458,
+			"7459" : S7459,
+			"7460" : S7460,
+			"7461" : S7461,
+			"7466" : S7466,
+			"7643" : S7643,
+			"7644" : S7644,
+			"7645" : S7645,
+			"7751" : S7751,
+			"7755" : S7755,
+			"7756" : S7756,
+			"7758" : S7758,
+			"7760" : S7760,
+			"7761" : S7761,
+			"7762" : S7762,
+		};
+
+		var map = L.map('map', {
+			zoomSnap: 0, 
+			wheelPxPerZoomLevel : 20, 
+			crs: L.CRS.Simple, 
+			layers: [ shom ],
+			zoomControl: false
+		} ).setView([-150, 150], 2);
+
+		L.control.layers(baseMaps).addTo(map);
+		L.control.zoom().addTo(map);
+
+		/*
+		var popup = L.popup();
+		var rect = 0;
+
+		function onMapUp(e) {
+
+			L.DomUtil.enableTextSelection();
+			L.DomUtil.enableImageDrag();
+			if (L.Draggable) {
+				L.Draggable._disabled = false;
+			}
+
+			map.off('mousemove', onMapMove);
+			map.off('mouseup', onMapUp);
+
+			rect.bindPopup(
+				"\"rbeg=" + Math.round(map.project(_start, 16).y/256) +
+				" rend=" + Math.round(map.project(e.latlng, 16).y/256) +
+				" cbeg=" + Math.round(map.project(_start, 16).x/256) +
+				" cend=" + Math.round(map.project(e.latlng, 16).x/256) +
+				"\"");
+
+			//map.removeLayer(rect);
+		}
+
+		function onMapMove(e) {
+			rect.setBounds([[_start], [e.latlng] ]);
+		}
+
+		function onMapDown(e) {
+
+			if (e.originalEvent.ctrlKey) {
+
+				L.DomUtil.disableTextSelection();
+				L.DomUtil.disableImageDrag();
+				if (L.Draggable) {
+					L.Draggable._disabled = true;
+				}
+
+				map.on('mousemove', onMapMove);
+				map.on('mouseup', onMapUp);
+
+				_start = e.latlng;
+
+				if (rect)
+					map.removeLayer(rect);
+
+				rect = L.rectangle([[_start], [_start]], {
+					color: 'red',
+					fillColor: '#f03',
+					fillOpacity: 0.2,
+					weiht: 2
+				}).addTo(map);
+			}
+
+		}
+
+		function onMapClick(e) {
+
+			popup
+			.setLatLng(e.latlng)
+			.setContent("You clicked the map at:"
+				+ "<br/> - " + e.latlng.toString()
+				+ "<br/> - 6: " + Math.round(map.project(e.latlng, 6).y/256)  + " - " + Math.round(map.project(e.latlng, 6).x/256)
+				+ "<br/> - 8: " + Math.round(map.project(e.latlng, 8).y/256)  + " - " + Math.round(map.project(e.latlng, 8).x/256)
+				+ "<br/> - 10: " + Math.round(map.project(e.latlng, 10).y/256)	+ " - " + Math.round(map.project(e.latlng, 10).x/256)
+				+ "<br/> - 12: " + Math.round(map.project(e.latlng, 12).y/256)	+ " - " + Math.round(map.project(e.latlng, 12).x/256)
+				+ "<br/> - 13: " + Math.round(map.project(e.latlng, 13).y/256)	+ " - " + Math.round(map.project(e.latlng, 13).x/256)
+				+ "<br/> - 14: " + Math.round(map.project(e.latlng, 14).y/256)	+ " - " + Math.round(map.project(e.latlng, 14).x/256)
+				+ "<br/> - 15: " + Math.round(map.project(e.latlng, 15).y/256)	+ " - " + Math.round(map.project(e.latlng, 15).x/256)
+				+ "<br/> - 16: " + Math.round(map.project(e.latlng, 16).y/256)	+ " - " + Math.round(map.project(e.latlng, 16).x/256)
+				+ "<br/> - 17: " + Math.round(map.project(e.latlng, 17).y/256)	+ " - " + Math.round(map.project(e.latlng, 17).x/256)
+				+ "<br/> - 18: " + Math.round(map.project(e.latlng, 18).y/256)	+ " - " + Math.round(map.project(e.latlng, 18).x/256)
+			)
+			.openOn(map);
+		}
+
+		map.on('click', onMapClick);
+		map.on('mousedown', onMapDown);
+		*/
+
+	</script>
+</body>
+</html>
+

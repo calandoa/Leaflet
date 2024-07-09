@@ -699,9 +699,12 @@ export const GridLayer = Layer.extend({
 
 		// _update just loads more tiles. If the tile zoom level differs too much
 		// from the map's, let _setView reset levels and prune old tiles.
-		if (Math.abs(zoom - this._tileZoom) > 1) { this._setView(center, zoom); return; }
+		// MODIFAC infinite loop
+		//if (Math.abs(zoom - this._tileZoom) > 1) { this._setView(center, zoom); return; }
 
 		// create a queue of coordinates to load tiles from
+		//console.log("tilerange z", this._tileZoom, "yx", tileRange.min.y, tileRange.max.y, tileRange.min.x, tileRange.max.x);
+		
 		for (let j = tileRange.min.y; j <= tileRange.max.y; j++) {
 			for (let i = tileRange.min.x; i <= tileRange.max.x; i++) {
 				const coords = new Point(i, j);

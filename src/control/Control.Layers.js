@@ -165,12 +165,13 @@ export const Layers = Control.extend({
 		this._container.classList.add('leaflet-control-layers-expanded');
 		this._section.style.height = null;
 		const acceptableHeight = this._map.getSize().y - (this._container.offsetTop + 50);
-		if (acceptableHeight < this._section.clientHeight) {
-			this._section.classList.add('leaflet-control-layers-scrollbar');
-			this._section.style.height = `${acceptableHeight}px`;
-		} else {
-			this._section.classList.remove('leaflet-control-layers-scrollbar');
-		}
+		// MODIFAC no scrollbar, use columns insead
+		//if (acceptableHeight < this._section.clientHeight) {
+		//	this._section.classList.add('leaflet-control-layers-scrollbar');
+		//	this._section.style.height = `${acceptableHeight}px`;
+		//} else {
+		//	this._section.classList.remove('leaflet-control-layers-scrollbar');
+		//}
 		this._checkDisabledLayers();
 		return this;
 	},
