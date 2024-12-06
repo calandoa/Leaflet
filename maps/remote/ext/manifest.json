@@ -1,0 +1,23 @@
+{
+	"manifest_version": 3,
+	"name": "MetamapExt",
+	"description": "Metamap Extension",
+	"version": "1.0",
+	"action": {
+		"default_popup": "metamap.html",
+		"default_icon": "metamap.png"
+	},
+	"permissions": [ 
+		"webRequest",
+		"declarativeNetRequest"
+	],
+	"host_permissions": [
+		"<all_urls>",
+		"file:///C:/share/pcf/map.pcf.pc.html",
+		"*://*/*"
+	],
+	
+	"background": {
+		"service_worker": "metamap.js"
+	}
+}

@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Remote maps PC</title>
+	<title>Remote maps mobile</title>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="leaflet.pc.css" />
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" /> -->
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+	<link rel="stylesheet" href="leaflet.mob.css" />
 </head>
 <body style="height: 100%" >
 	<div id="map" style="width: 100%; height: 100% ;  position:absolute; top: 0%; left: 0%;"></div>
 	<!-- <div id="map" style="width: 30%; height: 40% ;  position:absolute; top: 30%; left: 35%;"></div>
 	-->
 	<script src="leaflet.src.js"></script>
-	<!--   <script src="../src/leaflet_calandoa/dist/leaflet.js"></script> -->
 	<script src="leaflet.lib.mapcoord.js"></script>
 	<script src="leaflet.lib.locate.js"></script>
 	<script>
@@ -46,10 +46,6 @@
 				subdomains: ['a', 'b', 'c'],
 				minZoom: 1, maxZoom: 24,
 			}),
-
-
-			
-
 
 			rtopo = L.tileLayer('http://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 				subdomains: ['a', 'b', 'c'],
@@ -201,31 +197,6 @@
 			latlngDesignators: true
 		}).addTo(map);
 
-		var popup = L.popup();
-
-		var CtrlTopLeft = L.Control.extend({
-			options: {
-				position: 'topleft',
-			},
-
-			onAdd: function (map) {
-				this._map = map;
-
-				var controlDiv = L.DomUtil.create('div', 'leaflet-control-lefttop');
-
-				var ctrl_zoom = L.DomUtil.create('p', 'leaflet-view-zoom', controlDiv);
-				ctrl_zoom.title = 'Remove last';
-				ctrl_zoom.innerHTML = ' Z: ' + map.getZoom() + ' ';
-				ctrl_zoom.style.backgroundColor = 'white';
-				//ctrl_rem.href = '#';
-				map.on('zoomend', function() { ctrl_zoom.innerHTML = '. Z: ' + map.getZoom() + ' .'; });
-
-				return controlDiv;
-			}
-
-		});
-		map.addControl(new CtrlTopLeft());
-
 		/* set interval for save */
 		setInterval(function(m) {
 				localStorage.setItem('lat', m.getCenter().lat);
@@ -237,6 +208,8 @@
 
 				localStorage.setItem('layer', str_layer);
 		}, 5000, map);
+
+
 
 		/* Add custom controls */
 		var CtrlTopRight = L.Control.extend({
@@ -253,7 +226,28 @@
 				localStorage.removeItem('lng');
 				localStorage.removeItem('zoom');
 
+				L.DomUtil.querySelector('leaflet-control-locate').style.backgroundColor = 'red';
+
 			},
+
+			/*
+			fn_gps: function (e) {
+				if (this._map.location !== null) {
+					this._map.circle = L.circle(map.location.latlng, map.location.accuracy/2);
+					this._map.circle.addTo(this._map);
+
+					this._map.setView(map.location.latlng, 16);
+					this._map.location = null;
+					L.DomUtil.get('gps').style.backgroundColor = 'lightgray';
+				} else {
+
+					if (this._map.circle)
+						map.removeLayer(this._map.circle);
+
+					map.locate();
+					L.DomUtil.get('gps').style.backgroundColor = 'white';
+				}
+			}, */
 
 			onAdd: function (map) {
 				this._map = map;
@@ -264,23 +258,37 @@
 				    .addListener(controlDiv, 'click', L.DomEvent.stopPropagation)
 				    .addListener(controlDiv, 'click', L.DomEvent.preventDefault);
 
-				var ctrl_reset = L.DomUtil.create('button', 'leaflet-control-command-reset', controlDiv);
+				var ctrl_reset = L.DomUtil.create('div', 'leaflet-control-command-reset', controlDiv);
 				ctrl_reset.title = 'Reset saved position';
 				ctrl_reset.innerHTML = 'reset';
 				ctrl_reset.href = '#';
 
-				//var ctrl_save = L.DomUtil.create('button', 'leaflet-control-command-save', controlDiv);
+				//var ctrl_save = L.DomUtil.create('div', 'leaflet-control-command-save', controlDiv);
 				//ctrl_save.title = 'Save position';
 				//ctrl_save.innerHTML = 'save';
 				//ctrl_save.href = '#';
+
+				/*
+				var ctrl_gps = L.DomUtil.create('div', 'leaflet-control-command-gps', controlDiv);
+				ctrl_gps.title = 'Go to GPS position';
+				ctrl_gps.innerHTML = 'gps';
+				ctrl_gps.id = 'gps';
+				ctrl_gps.href = '#';
+				ctrl_gps.style.color = 'gray';
+				*/
+
 				L.DomEvent
-					.on(ctrl_reset, 'click', this.fn_reset, this);
-				//	.on(ctrl_save, 'click', this.fn_save, this);
+					.on(ctrl_reset, 'click', this.fn_reset, this)
+					//.on(ctrl_save, 'click', this.fn_save, this)
+					//.on(ctrl_gps, 'click', this.fn_gps, this)
+					;
 
 				return controlDiv;
 			}
 
 		});
+
+		//map.locate({ timeout: 6000, enableHighAccuracy: true});
 
 		map.addControl(new CtrlTopRight());
 
@@ -288,40 +296,61 @@
 
 		L.control.locate({
 			position: "topright",
-			 flyTo: true,
-			 //setView:always,
+			 //flyTo: true,
+			 setView: "always",
 			 clickBehavior: {
-				inView: "setView",
+				//inView: "setView",
+				outOfView: "setView",
+				inViewNotFollowing: "setView"
 			},
+     //keepCurrentZoomLevel : true,
 			locateOptions: {
 				enableHighAccuracy: true,
-				 maxZoom: 14
-			}
+				maxZoom: 14
+			},
+			 compassStyle: {
+				radius: 12, // How far is the arrow from the center of the marker
+				width: 20, // Width of the arrow
+				depth: 20 // Length of the arrow
+			},
+			//drawMarker: false,
+
+			strings: {
+				title: "Precision",
+				metersUnit: "meters",
+				feetUnit: "feet",
+				popup: "Precision {distance} {unit}",
+				outsideMapBoundsMsg: "outside"
+			},
 		}).addTo(map);
 
-		function onMapClick(e) {
 
-			TILE_SIZE=512;
+		/* Set location behavior */
+		map.on('locationfound', function(e) {
+			//map.location = e;
+			//map.setView(e.latlng, 12);
 
-			popup
-			.setLatLng(e.latlng)
-			.setContent("You clicked the map (tile:" + TILE_SIZE + ") at:"
-				+ "<br/> - " + e.latlng.toString()
-				+ "<br/> - 4: " + Math.round(map.project(e.latlng, 4).y/TILE_SIZE)  + " - " + Math.round(map.project(e.latlng, 4).x/TILE_SIZE)
-				+ "<br/> - 6: " + Math.round(map.project(e.latlng, 6).y/TILE_SIZE)  + " - " + Math.round(map.project(e.latlng, 6).x/TILE_SIZE)
-				+ "<br/> - 8: " + Math.round(map.project(e.latlng, 8).y/TILE_SIZE)  + " - " + Math.round(map.project(e.latlng, 8).x/TILE_SIZE)
-				+ "<br/> - 10: " + Math.round(map.project(e.latlng, 10).y/TILE_SIZE)  + " - " + Math.round(map.project(e.latlng, 10).x/TILE_SIZE)
-				+ "<br/> - 12: " + Math.round(map.project(e.latlng, 12).y/TILE_SIZE)  + " - " + Math.round(map.project(e.latlng, 12).x/TILE_SIZE)
-				+ "<br/> - 14: " + Math.round(map.project(e.latlng, 14).y/TILE_SIZE)  + " - " + Math.round(map.project(e.latlng, 14).x/TILE_SIZE)
-				+ "<br/> - 16: " + Math.round(map.project(e.latlng, 16).y/TILE_SIZE)  + " - " + Math.round(map.project(e.latlng, 16).x/TILE_SIZE)
-				+ "<br/> - 18: " + Math.round(map.project(e.latlng, 18).y/TILE_SIZE)  + " - " + Math.round(map.project(e.latlng, 18).x/TILE_SIZE)
-			)
-			.openOn(map);
-		}
+			console.log("LOC F");
+			document.querySelector('.leaflet-bar-part').style.backgroundColor = '#00ff00';
+		} );
+		map.on('locationerror', function(e) {
+			document.querySelector('.leaflet-bar-part').style.backgroundColor = '#ff0000';
+			console.log("LOC ERR");
+		} );
 
-		map.on('click', onMapClick);
-		//map.on('mousedown', onMapDown);
+		map.on('locateactivate', function(e) {
+			document.querySelector('.leaflet-bar-part').style.backgroundColor = '#aaffaa';
+			console.log("LOC ACT");
+		});
+		map.on('locatedeactivate', function(e) {
+			document.querySelector('.leaflet-bar-part').style.backgroundColor = '#dddddd';
+			console.log("LOC DE");
+		});
 
-	</script>
+		//console.log(document.querySelector('.leaflet-control-locate'));
+		//console.log(document.querySelector('.leaflet-control-locate-location-arrow')); //.id = 'arrow';
+
+		//document.querySelector('.leaflet-bar-part').style.backgroundColor = '#dd0000';
+		</script>
 </body>
 </html>
