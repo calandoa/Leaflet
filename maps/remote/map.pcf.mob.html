@@ -149,17 +149,17 @@
 		    //"OSM": osm,
 		    //"ArcGIS": arcgis,
 		    //"Bing": bing,
-		    "Rem C-MAP": rcmap,
 		    "Rem OSM": rosm,
 		    "Rem Topo": rtopo,
 		    "Rem Topo2": rtopo2,
-		    "Rem ArcGIS": rarcgis,
-		    "Rem Bing": rbing,
-		    "Rem Google": rgl,
+		    "Rem C-MAP": rcmap,
 		    "Rem Shom": rsh,
 		    "Rem IGN": rign,
 		    "Rem Navio": rnavio,
 		    "Rem Garmin": rgarmin,
+		    "Rem ArcGIS": rarcgis,
+		    "Rem Bing": rbing,
+		    "Rem Google": rgl,
 		    //"Rem Poly": rign2,
 		};
 
@@ -173,17 +173,17 @@
 		//console.log(str_layer);
 
 		//str_layer = null;
-		var here = new  L.LatLng(-13, -142);
+		var here = new  L.LatLng(45, 5); // France
 		var map = L.map('map', {
 			center: here,
-			zoom: 5,
+			zoom: 6,
 			//layers: [ str_layer !== 'undefined'? baseMaps[str_layer] : rosm ] ,
 			layers: [ str_layer != null ? baseMaps[str_layer] : rosm ] ,
 			zoomControl: false,
 		} );
 
 		L.control.layers(baseMaps).addTo(map);
-		L.control.scale( { maxWidth : 400, imperial : false } ).addTo(map);
+		L.control.scale( { maxWidth : 250, imperial : false } ).addTo(map);
 
 		/* Go to saved view if any */
 		if (str_lat && str_lng && str_zoom) {
@@ -218,7 +218,7 @@
 			},
 
 			fn_reset: function (e) {
-				map.setView([-13, -142], 5);
+				map.setView([45, 5], 6);
 				//map.setView([0.0, 0.0], 4);
 				//localStorage.removeItem();
 				localStorage.removeItem('layer');

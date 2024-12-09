@@ -187,8 +187,9 @@ html, body, #map {
 /* general toolbar styles */
 
 .leaflet-bar a {
-	background-color: #dddddd;
+	background-color: #ffffff;
 	width: 35px;
+	height: 35px;
 	line-height: 35px;
 	display: block;
 	text-align: center;
@@ -260,7 +261,7 @@ html, body, #map {
 /* attribution and scale controls */
 .leaflet-control-attribution,
 .leaflet-control-scale-line {
-	padding: 0 5px;
+	padding: 1px;
 	color: #333;
 	}
 .leaflet-container .leaflet-control-attribution,
@@ -274,13 +275,14 @@ html, body, #map {
 	margin-bottom: 5px;
 	}
 .leaflet-control-scale-line {
-	border-top: none;
 	color: black;
 	line-height: 1.1;
 	padding: 2px 5px 1px;
 	font-size: 11px;
-	background-color: #dddddd;
+	background-color: #eeeeee;
 	overflow: hidden;
+	border-style: solid;
+	border-width: 1px;
 	}
 
 
@@ -352,7 +354,7 @@ html, body, #map {
 	background-repeat: no-repeat;
 	display: block;
 	text-align: center;
-	background-color: #dddddd;
+	background-color: #ffffff;
 	color: black;
 }
 
@@ -383,18 +385,19 @@ html, body, #map {
   @return url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="' + $color + '" d="M304 48a48 48 0 1 1-96 0 48 48 0 0 1 96 0zm-48 368a48 48 0 1 0 0 96 48 48 0 0 0 0-96zm208-208a48 48 0 1 0 0 96 48 48 0 0 0 0-96zM96 256a48 48 0 1 0-96 0 48 48 0 0 0 96 0zm13 99a48 48 0 1 0 0 96 48 48 0 0 0 0-96zm294 0a48 48 0 1 0 0 96 48 48 0 0 0 0-96zM109 61a48 48 0 1 0 0 96 48 48 0 0 0 0-96z"/></svg>');
 }
 
+.leaflet-control-locate-location-arrow {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 5px 0px -5px 0px;
+    padding: 1px;
+    background-image: url(images/gps.svg);
+}
+
 .leaflet-control-locate {
   a {
     cursor: pointer;
 
-    .leaflet-control-locate-location-arrow {
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      margin: 5px 0px -5px 0px;
-	  //padding: 1px;
-	  background:url(images/gps.svg);
-    }
 
     .leaflet-control-locate-spinner {
       display: inline-block;
